@@ -17,8 +17,8 @@ function renderButtons() {
     a.text(cars[i]);
     // Appending the button to the HTML page (Puts it on the end)
     $("#carContainer").append(a);
-    btnListener();
   }
+  btnListener();
 }
 
 // This function detects the click of the addCar button and adds a new element to the array
@@ -36,14 +36,11 @@ renderButtons();
 
 function btnListener() {
   $("button").on("click", function() {
-    // TODO: Grabbing and storing the array element value from the button being clicked
-    // This now works for all existing buttons on the page, it does work for buttons added by user...
+
     var btnPressed = $(this).text();
-    
     // Constructing a queryURL using the car name
     var queryURL = "https://api.giphy.com/v1/gifs/search?q=" +
     btnPressed + "&api_key=QAKj5BHpQWrw3yXBgL0Tlk3WZ3dFVBVA&limit=10";
-    
     // Performing an AJAX request with the queryURL
     $.ajax({
       url: queryURL,
@@ -63,8 +60,15 @@ function btnListener() {
         var p = $("<p>").text("Rating: " + results[i].rating);
         // Creating and storing an image tag
         var carImage = $("<img>");
+        carImage.data("url", results[i].images.fixed_height.url);
+        // This function switches around the old and new URLs so that it will animate and be still when you click them...
+        carImage.click(function() {
+          var oldURL = this.src;
+          this.src = $(this).data("url");
+          $(this).data("url", oldURL);
+        })
         // Setting the src attribute of the image to a property pulled off the result item
-        carImage.attr("src", results[i].images.fixed_height.url);
+        carImage.attr("src", results[i].images.fixed_height_still.url);
         // Appending the paragraph and image tag to the carDiv
         carDiv.append(p);
         carDiv.append(carImage);
@@ -74,7 +78,3 @@ function btnListener() {
     });
   });
 };
-  
-  // TODO: Make Giphys come on the page still and start/stop when clicked...
-  
-  // Write an if statement that will add and remove "_s" to the end of the image url to change if it is still or not

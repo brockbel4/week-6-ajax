@@ -33,3 +33,45 @@ $("#addCar").on("click", function(e) {
 
 renderButtons();
 
+$("button").on("click", function() {
+  // TODO: Grabbing and storing the array element value from the button being clicked
+  // This now works for all existing buttons on the page, it does work for buttons added by user...
+  var btnPressed = $(this).text();
+
+  // Constructing a queryURL using the car name
+  var queryURL = "https://api.giphy.com/v1/gifs/search?q=" +
+    btnPressed + "&api_key=QAKj5BHpQWrw3yXBgL0Tlk3WZ3dFVBVA&limit=10";
+
+  // Performing an AJAX request with the queryURL
+  $.ajax({
+    url: queryURL,
+    method: "GET"
+  })
+    // After data comes back from the request
+    .then(function(response) {
+      console.log(queryURL);
+      console.log(response);
+      // storing the data from the AJAX request in the results variable
+      var results = response.data;
+      // Looping through each result item
+      for (var i = 0; i < results.length; i++) {
+        // Creating and storing a div tag
+        var carDiv = $("<div>");
+        // Creating a paragraph tag with the result item's rating
+        var p = $("<p>").text("Rating: " + results[i].rating);
+        // Creating and storing an image tag
+        var carImage = $("<img>");
+        // Setting the src attribute of the image to a property pulled off the result item
+        carImage.attr("src", results[i].images.fixed_height.url);
+        // Appending the paragraph and image tag to the carDiv
+        carDiv.append(p);
+        carDiv.append(carImage);
+        // Prependng the animalDiv to the HTML page in the "#giphyDisplay" div
+        $("#giphyDisplay").prepend(carDiv);
+      }
+    });
+});
+
+// TODO: Make Giphys come on the page still and start/stop when clicked...
+
+// Write an if statement that will add and remove "_s" to the end of the image url to change if it is still or not

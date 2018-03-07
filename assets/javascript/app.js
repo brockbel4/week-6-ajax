@@ -1,30 +1,35 @@
-// Event listener for our randomBtn
-$("#randomBtn").on("click", function() {
+// Initial Cars Array
+var cars = ["McLaren", "Lamborghini", "Audi", "Bugatti", "Porsche", "Pagani", "Koenigsegg", "Ferrari", "Aston Martin", "BMW"];
 
-    // Storing our giphy API URL for a random image
-    var queryURL = "https://api.giphy.com/v1/gifs/random?api_key=QAKj5BHpQWrw3yXBgL0Tlk3WZ3dFVBVA";
-    var topic = "";
+// Displays the Buttons on the page
+function renderButtons() {
+// Delete all of the car buttons prior to adding new ones to avoid a repeat
+  $("#carContainer").empty();
+// Looping through the array of cars/buttons
+  for (var i = 0; i < cars.length; i++) {
+// Dynamically creates a button for each array element
+    var a = $("<button>");
+// Adding the class to the buttons
+    a.addClass("car");
+// Adds a data-attribute with the value of the car name at the index of i
+    a.attr("data-name", cars[i]);
+// Putting the text on the button by taking the string from the array and using .text()
+    a.text(cars[i]);
+// Appending the button to the HTML page (Puts it on the end)
+    $("#carContainer").append(a);
+  }
+}
 
-    // Perfoming an AJAX GET request to our queryURL
-    $.ajax({
-      url: queryURL,
-      method: "GET"
-    })
+// This function detects the click of the addCar button and adds a new element to the array
+$("#addCar").on("click", function(e) {
 
-    // After the data from the AJAX request comes back
-      .then(function(response) {
+  e.preventDefault();
+// Grab the input text value, trim extra spaces off beginning and end
+  var car = $("#carInput").val().trim();
+// Add the value to the array
+  cars.push(car);
+  renderButtons();
+});
 
-      // Saving the image_original_url property
-        var imageUrl = response.data.image_original_url;
+renderButtons();
 
-        // Creating and storing an image tag
-        var randomImage = $("<img>");
-
-        // Setting the randomImage src attribute to imageUrl
-        randomImage.attr("src", imageUrl);
-        randomImage.attr("alt", "random image");
-
-        // Prepending the randomImage to the images div
-        $("#images").prepend(randomImage);
-      });
-  });

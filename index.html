@@ -13,17 +13,25 @@
 </head>
 
 <body>
-    <button id="randomBtn">random Giphy button</button>
-    <div class="input-group col-sm-3">
-        <input type="text" class="form-control" placeholder="Type your desired topic here..." aria-label="Recipient's username" aria-describedby="basic-addon2">
-        <div class="input-group-append">
-            <button class="btn btn-outline-secondary" type="button">Add Topic</button>
-        </div>
+
+    <div class="container">
+        <h1>Movie Search</h1>
+        
+        <!-- Car buttons will be put here -->
+        <div id="carContainer"></div>
+        
+        <form id="carForm">
+            <label for="carInput">Add a car of your choice!</label>
+            <input type="text" id="carInput">
+            <br>
+            
+            <!-- Button triggers new movie to be added -->
+            <input id="addCar" type="submit" value="Add a car of your own choice!">
+        </form>
     </div>
-    <div id="images">
-    </div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="./assets/javascript/app.js"></script>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="./assets/javascript/app.js"></script>
 </body>
 
 </html>

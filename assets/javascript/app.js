@@ -10,7 +10,7 @@ function renderButtons() {
     // Dynamically creates a button for each array element
     var a = $("<button>");
     // Adding the class to the buttons
-    a.addClass("car");
+    a.addClass("car btn btn-info");
     // Adds a data-attribute with the value of the car name at the index of i
     a.attr("data-name", cars[i]);
     // Putting the text on the button by taking the string from the array and using .text()
@@ -58,6 +58,7 @@ function btnListener() {
         var carDiv = $("<div>");
         // Creating a paragraph tag with the result item's rating
         var p = $("<p>").text("Rating: " + results[i].rating);
+        p.addClass("ratingStyle")
         // Creating and storing an image tag
         var carImage = $("<img>");
         carImage.data("url", results[i].images.fixed_height.url);

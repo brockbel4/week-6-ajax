@@ -1,0 +1,25 @@
+body{
+    background-color: black;
+}
+
+h1{
+    color: #07889B;
+}
+
+label{
+    color: #07889B;
+}
+
+button{
+    color: black;
+    margin: 10px;
+}
+
+img{
+    margin: 25px;
+}
+
+.ratingStyle{
+    font-size: 30px;
+    color: #07889B;
+}
